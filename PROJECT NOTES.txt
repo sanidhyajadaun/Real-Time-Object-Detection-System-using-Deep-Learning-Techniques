@@ -1,0 +1,46 @@
+PROJECT NOTES
+
+---------- CFG file ------------
+
+In object detection in Python, a CFG file (short for "configuration file") is a text file that contains various parameters and settings used to configure the object detection model.
+
+The specific contents of a CFG file can vary depending on the object detection framework being used, but in general, it will contain parameters such as:
+
+- Dataset configuration: including the paths to the training and validation datasets, the number of classes, and the label names.
+- Model architecture: including the type of model being used (such as YOLO, Faster R-CNN, etc.), the input size of the images, and the number of anchor boxes.
+- Training configuration: including the learning rate, the number of epochs, and the batch size.
+- Inference configuration: including the confidence threshold for detections, the IOU (intersection over union) threshold for non-maximum suppression, and the output directory for the detection results.
+- In general, the purpose of a CFG file is to provide an easy and flexible way to configure the object detection model
+
+-----------OPEN CV----------------
+
+OPENCV : Open Source Computer Vision Library
+
+---------- NMS--------------------
+
+Even though we ignored weak detections, there will be lot of duplicate detections with overlapping bounding boxes. Non-max suppression removes boxes with high overlapping.
+
+--------VIDEO CAPTURE---------------
+
+cv2.VideoCapture() is a function in the OpenCV library that allows you to capture video frames from a camera, video file, or a network stream. The function takes a single argument, which is the device index or the name of the video file or network stream.
+
+device_index: This is an integer value that represents the index of the camera or video device you want to 
+
+--------------BLOB--------------------
+
+cv2.dnn.blobFromImage is a function in the OpenCV library that preprocesses an input image before feeding it into a deep neural network. This function generates a blob (Binary Large OBject) from an image and resizes, scales, and subtracts the mean values from the channels of the image. The output of this function is a blob that can be used as an input to a deep neural network.
+
+------------LAYER NAMES--------------------
+
+In Python cv2, getUnconnectedOutLayersNames() is a function in the OpenCV library that is used to retrieve the names of the output layers of a neural network that are not connected to any other layer. This function is typically used in the context of deep learning-based object detection tasks, where the network architecture may include multiple output layers for detecting objects at different scales and levels of detail.
+The getUnconnectedOutLayersNames() function takes a single argument, which is a cv2.dnn.Net object representing the neural network. This function returns a list of strings, where each string represents the name of an unconnected output layer in the network.
+
+----------------FORWARD-------------------
+
+In Python cv2, the forward() function is a method of the cv2.dnn.Net class that is used to perform a forward pass inference on the neural network. A forward pass is the process of taking an input image or tensor and propagating it through the network's layers to produce an output prediction.
+
+The forward() method takes two optional arguments:
+
+outputNames: a list of strings representing the names of the output layers that should be returned. If not specified, all output layers will be returned.
+inputs: a list of input blobs (i.e., tensors) to be fed into the network. If not specified, the network will use the input data specified during network initialization.
+The forward() method returns a list of numpy arrays, where each array represents the output data of a specified output layer. The shape and contents of each array depend on the specific architecture and parameters of the neural network.
