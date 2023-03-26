@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 class ImageObjectDetection:
-    def __init__(self):
-        self.temp = 0
+    def __init__(self,image_path):
+        self.image_path = image_path
     #Load yolo
     def load_yolo(self):
         net = cv2.dnn.readNet("weights/yolov7.weights", "cfg/yolov7.cfg")
@@ -18,9 +18,9 @@ class ImageObjectDetection:
         colors = np.random.uniform(0, 255, size=(len(classes), 3))
         return net, classes, colors, output_layers
 
-    def load_image(self,img_path):
+    def load_image(self):
         # image loading
-        img = cv2.imread(img_path)
+        img = cv2.imread(self.img_path)
         # img = cv2.resize(img, None, fx=0.4, fy=0.4)
         height, width, channels = img.shape
         return img, height, width, channels
@@ -72,9 +72,9 @@ class ImageObjectDetection:
         # resized = cv2.resize(img,(500,500), interpolation = cv2.INTER_AREA)
         cv2.imwrite("predictions.jpg",img)
 
-    def image_detect(self,img_path): 
+    def image_detect(self): 
         model, classes, colors, output_layers = self.load_yolo()
-        image, height, width, channels = self.load_image(img_path)
+        image, height, width, channels = self.load_image(self.img_path)
         blob, outputs = self.detect_objects(image, model, output_layers)
         boxes, confs, class_ids = self.get_box_dimensions(outputs, height, width)
         self.draw_labels(boxes, confs, colors, class_ids, classes, image)
@@ -85,6 +85,6 @@ class ImageObjectDetection:
 
 image_path = "image/city.jpg"
 print("Opening "+image_path+" .... ")
-ref = ImageObjectDetection()
-ref.image_detect(image_path)
+ref = ImageObjectDetection(image_path)
+ref.image_detect()
 cv2.destroyAllWindows()
