@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import os
 class RealTimeObjectDetection:
     def __init__(self,capture):
         self.capture = capture
@@ -81,6 +81,8 @@ class RealTimeObjectDetection:
     def webcam_detect(self):
         model, classes, colors, output_layers = self.load_data()
         cap = self.start_webcam()
+        lst = ['/','-','\\','|']
+        i = 0
         while True:
             # read() returns a tuple, first a boolean value which denotes whether the frame is read successfully or not and then returns the whole frame
             _, frame = cap.read()
@@ -92,6 +94,9 @@ class RealTimeObjectDetection:
             boxes, confs, class_ids = self.get_box_dimensions(outputs, height, width)
             # function called to plot the contours along with the labels
             self.draw_labels(boxes, confs, colors, class_ids, classes, frame)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Detecting........",lst[i],sep="")
+            i = (i + 1) % 4
             key = cv2.waitKey(1)
             if key == 27:
                 break
