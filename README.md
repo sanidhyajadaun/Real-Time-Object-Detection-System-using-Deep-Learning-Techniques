@@ -1,4 +1,6 @@
-# **Real Time Object Detection System using Deep Learning Techniques**
+<p align="center">
+<img src='Banner/Project Banner.jpg' alt="banner"></img>
+</p>
 
 ## **Project Description** 📋
 
